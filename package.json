@@ -1,0 +1,35 @@
+{
+  "name": "codearena",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "client",
+    "server"
+  ],
+  "scripts": {
+    "dev": "concurrently -k -n api,web \"npm run dev -w server\" \"npm run dev -w client\"",
+    "build": "npm run build -w client",
+    "start": "npm start -w server",
+    "seed": "node server/scripts/seed.js",
+    "test": "node --test --test-concurrency=1 server/tests/*.test.js",
+    "check": "npm run build && npm test",
+    "format": "prettier --write client/src server .vscode package.json client/package.json client/vite.config.js render.yaml",
+    "format:check": "prettier --check client/src server .vscode package.json client/package.json client/vite.config.js render.yaml"
+  },
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1",
+    "prettier": "^3.10.1",
+    "socket.io-client": "^4.8.1",
+    "supertest": "^7.1.4"
+  },
+  "dependencies": {
+    "marked": "^18.2.1",
+    "multer": "^2.5.0",
+    "sanitize-html": "^2.18.2",
+    "yaml": "^2.9.1"
+  }
+}

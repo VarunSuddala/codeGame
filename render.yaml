@@ -1,0 +1,29 @@
+services:
+  - type: web
+    name: codearena
+    runtime: node
+    numInstances: 1
+    buildCommand: npm ci && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: TRUST_PROXY
+        value: '1'
+      - key: MONGO_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: CLIENT_ORIGIN
+        sync: false
+      - key: ONLINECOMPILER_API_URL
+        value: https://api.onlinecompiler.io/api
+      - key: ONLINECOMPILER_API_KEY
+        sync: false
+      - key: ONLINECOMPILER_COMPILER
+        value: python-3.14
+      - key: ONLINECOMPILER_CONCURRENCY
+        value: '2'
+      - key: ONLINECOMPILER_RETRIES
+        value: '3'
